@@ -95,7 +95,9 @@ function mailchimp_lists_rules_action_user_subscribe_list($account, $list) {
  * Action callback: Unsubscribe a user to a list.
  */
 function mailchimp_lists_rules_action_unsubscribe_list($mail, $list) {
-  mailchimp_unsubscribe_user($list, $mail, FALSE);
+  if(variable_get('mailchimp_allow_unsubscribes', FALSE)) {
+    mailchimp_unsubscribe_user($list, $mail, FALSE);
+  }
 }
 
 /**

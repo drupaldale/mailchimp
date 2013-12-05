@@ -44,6 +44,12 @@ function mailchimp_admin_settings() {
     '#default_value' => variable_get('mailchimp_use_secure', TRUE),
     "#description" => t('Communicate with the MailChimp API over a secure connection.'),
   );
+  $form['mailchimp_allow_unsubscribes'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Allow Unsubscribes via Drupal'),
+    '#default_value' => variable_get('mailchimp_allow_unsubscribes', FALSE),
+    "#description" => t('Simple list subscribe forms may unsubscribe existing users. For most Drupal - Mailchimp integrations only subscribes forms need to be exposed.'),
+  );
 
   return system_settings_form($form);
 }

@@ -682,7 +682,13 @@ function mailchimp_lists_execute_change($function, $list, $mail, $mergevars = NU
         break;
 
       case 'remove':
-        $ret = mailchimp_unsubscribe_user($list, $mail, TRUE, $mcapi);
+        if(variable_get('mailchimp_allow_unsubscribes', FALSE)) {
+          $ret = mailchimp_unsubscribe_user($list, $mail, TRUE, $mcapi);
+        }
+        else {
+          drupal_set_message(t('You are already subscribed to this list.', array()));
+          $ret = 1;
+        }
         break;
 
       case 'update':
